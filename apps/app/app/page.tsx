@@ -1,3 +1,4 @@
+import { CopyButton } from "@unified/ui/components/animate-ui/copy-button";
 import { Button } from "@unified/ui/components/button";
 import {
 	Card,
@@ -14,6 +15,7 @@ export default function Page() {
 			<div className="flex flex-col items-center justify-center gap-4 w-full">
 				<h1 className="text-2xl font-bold">Hello World</h1>
 				<Button size="sm">Button</Button>
+				<CopyButton content="Hello World" />
 				<Button size="sm" variant="secondary">
 					Button
 				</Button>
