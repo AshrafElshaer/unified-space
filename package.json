@@ -29,5 +29,8 @@
 	"engines": {
 		"node": ">=20",
 		"bun": ">=1.0.30"
+	},
+	"dependencies": {
+		"husky": "^9.1.7"
 	}
 }
