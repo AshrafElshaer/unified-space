@@ -2,10 +2,10 @@ import { Button } from "@unified/ui/components/button";
 import {
 	Card,
 	CardContent,
+	CardDescription,
 	CardFooter,
 	CardHeader,
 	CardTitle,
-	CardDescription,
 } from "@unified/ui/components/card";
 
 export default function Page() {
@@ -27,6 +27,12 @@ export default function Page() {
 					Button
 				</Button>
 				<Button size="sm" variant="link">
+					Button
+				</Button>
+				<Button size="sm" variant="success">
+					Button
+				</Button>
+				<Button size="sm" variant="warning">
 					Button
 				</Button>
 				<Card className="bg-accent">
