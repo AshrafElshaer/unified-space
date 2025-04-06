@@ -26,7 +26,6 @@
 		"@types/react": "^19",
 		"@types/react-dom": "^19",
 		"@unified/typescript-config": "workspace:*",
-		"@workspace/eslint-config": "workspace:^",
 		"typescript": "5.7.3"
 	}
 }
