@@ -1,0 +1,37 @@
+{
+	"name": "shadcn-ui-monorepo",
+	"version": "0.0.1",
+	"private": true,
+	"workspaces": ["packages/*", "apps/*"],
+	"scripts": {
+		"build": "turbo build",
+		"clean": "git clean -xdf node_modules",
+		"clean:workspaces": "turbo clean",
+		"dev": "turbo dev --parallel",
+		"dev:trigger.dev": "turbo jobs --filter=@optima/trigger.dev",
+		"dev:platform": "turbo dev --filter=@optima/platform",
+		"dev:web": "turbo dev --filter=@optima/web",
+		"dev:jobs-web": "turbo dev --filter=@optima/jobs-web",
+		"start:platform": "turbo start --filter=@optima/platform",
+		"start:web": "turbo start --filter=@optima/web",
+		"start:trigger.dev": "turbo start --filter=@optima/trigger.dev",
+		"start:jobs-web": "turbo start --filter=@optima/jobs-web",
+		"test": "turbo test --parallel",
+		"format": "biome format --write .",
+		"lint": "turbo lint && bun lint:repo",
+		"lint:repo": "bunx sherif@latest",
+		"lint:repo:fix": "bunx sherif@latest --fix",
+		"typecheck": "turbo typecheck"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
+		"@unified/typescript-config": "workspace:*",
+		"turbo": "^2.4.2",
+		"typescript": "5.7.3"
+	},
+	"packageManager": "bun@1.0.30",
+	"engines": {
+		"node": ">=20",
+		"bun": ">=1.0.30"
+	}
+}
