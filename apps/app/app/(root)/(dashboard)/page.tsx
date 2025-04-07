@@ -12,7 +12,7 @@ import { Input } from "@unified/ui/components/inputs/input";
 
 export default function Page() {
 	return (
-		<div className="flex items-center justify-center min-h-svh">
+		<div className="flex items-center justify-centerflex-1">
 			<div className="flex flex-col items-center justify-center gap-4 w-full">
 				<h1 className="text-2xl font-bold">Hello World</h1>
 				<Button size="sm">Button</Button>

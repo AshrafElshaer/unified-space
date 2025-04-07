@@ -14,6 +14,7 @@ import { NavTeams } from "@/components/sidebar/nav-teams";
 import { NavUser } from "@/components/sidebar/nav-user";
 import { NavWorkspace } from "@/components/sidebar/nav-workspace";
 import { TeamSwitcher } from "@/components/sidebar/team-switcher";
+import { Icons } from "@unified/ui/components/icons";
 import {
 	Sidebar,
 	SidebarContent,
@@ -25,11 +26,14 @@ import {
 	SidebarMenuItem,
 	SidebarRail,
 } from "@unified/ui/components/sidebar";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { BiMessageRounded, BiSolidMessageRounded } from "react-icons/bi";
 import { HiOutlineUsers, HiUsers } from "react-icons/hi2";
 import { IoGrid, IoGridOutline } from "react-icons/io5";
 import { IoCalendarNumber, IoCalendarNumberOutline } from "react-icons/io5";
 import { PiUserSquare, PiUserSquareFill } from "react-icons/pi";
+import { CommandMenu } from "./cmdk";
 // This is sample data.
 const data = {
 	user: {
@@ -117,86 +121,84 @@ const data = {
 				},
 			],
 		},
-		// {
-		// 	title: "Settings",
-		// 	url: "#",
-		// 	icon: Settings2,
-		// 	items: [
-		// 		{
-		// 			title: "General",
-		// 			url: "#",
-		// 		},
-		// 		{
-		// 			title: "Team",
-		// 			url: "#",
-		// 		},
-		// 		{
-		// 			title: "Billing",
-		// 			url: "#",
-		// 		},
-		// 		{
-		// 			title: "Limits",
-		// 			url: "#",
-		// 		},
-		// 	],
-		// },
 	],
-	projects: [
+	workspaces: [
 		{
 			name: "Teams",
-			url: "#",
-			icon: <PiUserSquare size={24} />,
+			url: "/teams",
+			icon: <Icons.Layers size={24} />,
+			activeIcon: <Icons.LayersFill size={24} />,
 			// PiUserSquareFill
 		},
 		{
 			name: "Projects",
-			url: "#",
-			icon: <IoGridOutline size={24} />,
+			url: "/projects",
+			icon: <Icons.Grid size={24} />,
+			activeIcon: <Icons.GridFill size={24} />,
 			// IoGrid
 		},
 		{
 			name: "Members",
-			url: "#",
-			icon: <HiOutlineUsers size={24} />,
+			url: "/members",
+			icon: <Icons.Users size={24} />,
+			activeIcon: <Icons.UsersFill size={24} />,
 			// HiUsers
 		},
 	],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+	const pathname = usePathname();
 	return (
-		<Sidebar collapsible="offcanvas" {...props}>
+		<Sidebar collapsible="offcanvas" className="bg-background" {...props}>
 			<SidebarHeader>
 				<TeamSwitcher teams={data.teams} />
 			</SidebarHeader>
 			<SidebarContent>
 				<SidebarGroup>
 					<SidebarMenu>
-						<SidebarMenuItem>
-							<SidebarMenuButton asChild>
-								<a href={"/"}>
-									<IoCalendarNumber size={24} />
-									<span>Calendar</span>
-								</a>
+						<CommandMenu />
+						<SidebarMenuItem className="mt-2">
+							<SidebarMenuButton asChild isActive={pathname === "/"}>
+								<Link href={"/"}>
+									{pathname === "/" ? <Icons.HomeFill /> : <Icons.Home />}
+									<span>Dashboard</span>
+								</Link>
 							</SidebarMenuButton>
 						</SidebarMenuItem>
 						<SidebarMenuItem>
-							<SidebarMenuButton asChild>
-								<a href={"/"}>
-									<BiSolidMessageRounded size={24} />
+							<SidebarMenuButton asChild isActive={pathname === "/calendar"}>
+								<Link href={"/calendar"}>
+									{pathname === "/calendar" ? (
+										<Icons.CalendarFill />
+									) : (
+										<Icons.Calendar />
+									)}
+
+									<span>Calendar</span>
+								</Link>
+							</SidebarMenuButton>
+						</SidebarMenuItem>
+						<SidebarMenuItem>
+							<SidebarMenuButton asChild isActive={pathname === "/messages"}>
+								<Link href={"/messages"}>
+									{pathname === "/messages" ? (
+										<Icons.MessagesFill />
+									) : (
+										<Icons.Messages />
+									)}
 									<span>Messages</span>
-								</a>
+								</Link>
 							</SidebarMenuButton>
 						</SidebarMenuItem>
 					</SidebarMenu>
 				</SidebarGroup>
-				<NavWorkspace projects={data.projects} />
+				<NavWorkspace workspaces={data.workspaces} />
 				<NavTeams items={data.navMain} />
 			</SidebarContent>
 			<SidebarFooter>
 				<NavUser user={data.user} />
 			</SidebarFooter>
-			<SidebarRail />
 		</Sidebar>
 	);
 }

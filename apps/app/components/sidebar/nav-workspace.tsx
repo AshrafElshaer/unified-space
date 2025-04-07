@@ -24,38 +24,34 @@ import {
 	SidebarMenuItem,
 	useSidebar,
 } from "@unified/ui/components/sidebar";
-
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 export function NavWorkspace({
-	projects,
+	workspaces,
 }: {
-	projects: {
+	workspaces: {
 		name: string;
 		url: string;
 		icon: React.ReactNode;
+		activeIcon: React.ReactNode;
 	}[];
 }) {
-	const { isMobile } = useSidebar();
+	const pathname = usePathname();
 
 	return (
 		<SidebarGroup className="group-data-[collapsible=icon]:hidden">
 			<SidebarGroupLabel>Workspace</SidebarGroupLabel>
 			<SidebarMenu>
-				{projects.map((item) => (
+				{workspaces.map((item) => (
 					<SidebarMenuItem key={item.name}>
-						<SidebarMenuButton asChild>
-							<a href={item.url}>
-								{item.icon}
+						<SidebarMenuButton asChild isActive={pathname === item.url}>
+							<Link href={item.url}>
+								{pathname === item.url ? item.activeIcon : item.icon}
 								<span>{item.name}</span>
-							</a>
+							</Link>
 						</SidebarMenuButton>
 					</SidebarMenuItem>
 				))}
-				{/* <SidebarMenuItem>
-          <SidebarMenuButton className="text-sidebar-foreground/70">
-            <MoreHorizontal className="text-sidebar-foreground/70" />
-            <span>More</span>
-          </SidebarMenuButton>
-        </SidebarMenuItem> */}
 			</SidebarMenu>
 		</SidebarGroup>
 	);
