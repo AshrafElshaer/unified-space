@@ -16,7 +16,10 @@ interface CopyButtonProps
 }
 
 const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
-	({ content, className, size, variant, delay = 3000, ...props }, ref) => {
+	(
+		{ content, className, size = "icon", variant, delay = 3000, ...props },
+		ref,
+	) => {
 		const [isCopied, setIsCopied] = React.useState(false);
 		const Icon = isCopied ? CheckIcon : CopyIcon;
 
@@ -50,7 +53,7 @@ const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
 						exit={{ scale: 0 }}
 						transition={{ duration: 0.15 }}
 					>
-						<Icon />
+						<Icon className={cn(isCopied && "text-success")} />
 					</motion.div>
 				</AnimatePresence>
 			</motion.button>

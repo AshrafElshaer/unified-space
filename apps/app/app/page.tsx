@@ -8,6 +8,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@unified/ui/components/card";
+import { Input } from "@unified/ui/components/inputs/input";
 
 export default function Page() {
 	return (
@@ -15,7 +16,8 @@ export default function Page() {
 			<div className="flex flex-col items-center justify-center gap-4 w-full">
 				<h1 className="text-2xl font-bold">Hello World</h1>
 				<Button size="sm">Button</Button>
-				<CopyButton content="Hello World" />
+				<Input placeholder="Input" />
+				<CopyButton content="Hello World" variant="secondary" />
 				<Button size="sm" variant="secondary">
 					Button
 				</Button>
