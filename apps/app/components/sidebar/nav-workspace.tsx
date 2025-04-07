@@ -37,6 +37,7 @@ export function NavWorkspace({
 	}[];
 }) {
 	const pathname = usePathname();
+	const { isMobile, setOpenMobile } = useSidebar();
 
 	return (
 		<SidebarGroup className="group-data-[collapsible=icon]:hidden">
@@ -44,7 +45,15 @@ export function NavWorkspace({
 			<SidebarMenu>
 				{workspaces.map((item) => (
 					<SidebarMenuItem key={item.name}>
-						<SidebarMenuButton asChild isActive={pathname === item.url}>
+						<SidebarMenuButton
+							asChild
+							isActive={pathname === item.url}
+							onClick={() => {
+								if (isMobile) {
+									setOpenMobile(false);
+								}
+							}}
+						>
 							<Link href={item.url}>
 								{pathname === item.url ? item.activeIcon : item.icon}
 								<span>{item.name}</span>

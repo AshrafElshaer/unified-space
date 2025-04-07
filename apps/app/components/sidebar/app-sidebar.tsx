@@ -155,44 +155,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 				<TeamSwitcher teams={data.teams} />
 			</SidebarHeader>
 			<SidebarContent>
-				<SidebarGroup>
-					<SidebarMenu>
-						<CommandMenu />
-						<SidebarMenuItem className="mt-2">
-							<SidebarMenuButton asChild isActive={pathname === "/"}>
-								<Link href={"/"}>
-									{pathname === "/" ? <Icons.HomeFill /> : <Icons.Home />}
-									<span>Dashboard</span>
-								</Link>
-							</SidebarMenuButton>
-						</SidebarMenuItem>
-						<SidebarMenuItem>
-							<SidebarMenuButton asChild isActive={pathname === "/calendar"}>
-								<Link href={"/calendar"}>
-									{pathname === "/calendar" ? (
-										<Icons.CalendarFill />
-									) : (
-										<Icons.Calendar />
-									)}
-
-									<span>Calendar</span>
-								</Link>
-							</SidebarMenuButton>
-						</SidebarMenuItem>
-						<SidebarMenuItem>
-							<SidebarMenuButton asChild isActive={pathname === "/messages"}>
-								<Link href={"/messages"}>
-									{pathname === "/messages" ? (
-										<Icons.MessagesFill />
-									) : (
-										<Icons.Messages />
-									)}
-									<span>Messages</span>
-								</Link>
-							</SidebarMenuButton>
-						</SidebarMenuItem>
-					</SidebarMenu>
-				</SidebarGroup>
+				
 				<NavWorkspace workspaces={data.workspaces} />
 				<NavTeams items={data.navMain} />
 			</SidebarContent>
