@@ -149,7 +149,6 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-	const pathname = usePathname();
 	return (
 		<Sidebar collapsible="offcanvas" className="bg-background" {...props}>
 			<SidebarHeader>
@@ -160,9 +159,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 				<NavWorkspace workspaces={data.workspaces} />
 				<NavTeams items={data.navMain} />
 			</SidebarContent>
-			<SidebarFooter>
-				<NavUser user={data.user} />
-			</SidebarFooter>
 		</Sidebar>
 	);
 }
