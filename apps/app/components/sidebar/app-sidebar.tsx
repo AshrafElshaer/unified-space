@@ -34,6 +34,7 @@ import { IoGrid, IoGridOutline } from "react-icons/io5";
 import { IoCalendarNumber, IoCalendarNumberOutline } from "react-icons/io5";
 import { PiUserSquare, PiUserSquareFill } from "react-icons/pi";
 import { CommandMenu } from "./cmdk";
+import { NavCore } from "./nav-core";
 // This is sample data.
 const data = {
 	user: {
@@ -155,7 +156,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 				<TeamSwitcher teams={data.teams} />
 			</SidebarHeader>
 			<SidebarContent>
-				
+				<NavCore />
 				<NavWorkspace workspaces={data.workspaces} />
 				<NavTeams items={data.navMain} />
 			</SidebarContent>
