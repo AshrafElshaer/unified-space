@@ -46,18 +46,19 @@ export const auth = betterAuth({
 				enabled: true,
 				plans: [
 					{
-						id: "plan_1",
 						name: "Basic",
-						price: 1000,
-						interval: "month",
+						freeTrial: {
+							days: 30,
+						},
 					},
 				],
 			},
+			async onCustomerCreate(data, request) {},
+			async onEvent(event) {},
 		}),
 		emailOTP({
 			async sendVerificationOTP({ email, otp, type }) {
 				// Implement the sendVerificationOTP method to send the OTP to the user's email address
-
 				await resend.emails.send({
 					from: "Unified Space <access@staffoptima.co>",
 					to: email,
@@ -117,6 +118,13 @@ export const auth = betterAuth({
 							activeOrganizationId: workspace?.id,
 						},
 					};
+				},
+			},
+		},
+		user: {
+			create: {
+				async after(user, context) {
+					// TODO:SEND WELCOME EMAIL
 				},
 			},
 		},
