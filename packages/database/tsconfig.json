@@ -1,0 +1,18 @@
+{
+	"extends": "@unified/typescript-config/react-library.json",
+	"compilerOptions": {
+		"composite": false,
+		"jsx": "react-jsx",
+		"skipLibCheck": true,
+		"strict": true,
+		"noEmit": true,
+		"strictNullChecks": true,
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"],
+			"@unified/ui/*": ["../ui/src/*"]
+		}
+	},
+	"include": ["**/*.ts", "**/*.tsx"],
+	"exclude": ["node_modules", ".react-email"]
+}

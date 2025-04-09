@@ -1,0 +1,31 @@
+{
+	"name": "@unified/database",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"build": "tsup src/database.ts src/schema/index.ts --format esm,cjs --dts --clean",
+		"db:migrate": "tsx scripts/migrate.ts",
+		"db:studio": "drizzle-kit studio",
+		"generate": "drizzle-kit generate:pg",
+		"db:push": "drizzle-kit push:pg"
+	},
+	"exports": {
+		".": "./src/database.ts",
+		"./schema": "./src/schema/index.ts",
+		"./queries": "./src/queries/index.ts",
+		"./mutations": "./src/mutations/index.ts"
+	},
+	"dependencies": {
+		"dotenv": "16.4.5",
+		"drizzle-orm": "0.29.4",
+		"drizzle-zod": "^0.7.1",
+		"pg": "^8.14.1",
+		"postgres": "3.4.3"
+	},
+	"devDependencies": {
+		"@unified/typescript-config": "workspace:*",
+		"drizzle-kit": "0.20.14",
+		"tsup": "8.0.2",
+		"typescript": "5.7.3"
+	}
+}

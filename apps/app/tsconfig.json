@@ -1,6 +1,10 @@
 {
 	"extends": "@unified/typescript-config/nextjs.json",
 	"compilerOptions": {
+		"lib": ["DOM", "ESNext"],
+		"declaration": false,
+		"declarationMap": false,
+
 		"baseUrl": ".",
 		"paths": {
 			"@/*": ["./*"],
@@ -19,5 +23,6 @@
 		"**/*.tsx",
 		".next/types/**/*.ts"
 	],
+
 	"exclude": ["node_modules"]
 }

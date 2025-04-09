@@ -21,6 +21,7 @@ import {
 	CommandSeparator,
 	CommandShortcut,
 } from "@unified/ui/components/command";
+import { LuArrowUpDown } from "react-icons/lu";
 
 export function CommandMenu() {
 	const [open, setOpen] = React.useState(false);
@@ -87,6 +88,25 @@ export function CommandMenu() {
 						</CommandItem>
 					</CommandGroup>
 				</CommandList>
+				<CommandSeparator />
+				<div className="px-4 py-2 flex items-center justify-between">
+					<div className="flex items-center gap-1">
+						<kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1   px-1.5 font-mono text-sm font-medium text-muted-foreground opacity-100">
+							ESC
+						</kbd>
+						<span className="text-sm">to close</span>
+					</div>
+					<div className="flex items-center gap-1">
+						<LuArrowUpDown className="w-4 h-4 text-muted-foreground" />
+						<span className="text-sm">to navigate</span>
+					</div>
+					<div className="flex items-center gap-1">
+						<kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1   px-1.5 font-mono text-sm font-medium text-muted-foreground opacity-100">
+							Enter
+						</kbd>
+						<span className="text-sm">to select</span>
+					</div>
+				</div>
 			</CommandDialog>
 		</>
 	);
