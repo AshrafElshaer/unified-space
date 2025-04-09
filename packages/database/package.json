@@ -3,7 +3,6 @@
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
-		"build": "tsup src/database.ts src/schema/index.ts --format esm,cjs --dts --clean",
 		"db:migrate": "tsx scripts/migrate.ts",
 		"db:studio": "drizzle-kit studio",
 		"generate": "drizzle-kit generate:pg",
