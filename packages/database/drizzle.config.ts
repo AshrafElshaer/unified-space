@@ -11,8 +11,9 @@ const getEnvVariable = (name: string) => {
 export default {
 	schema: "./src/schema",
 	out: "./drizzle",
-	driver: "pg",
+	dialect: "postgresql",
+
 	dbCredentials: {
-		connectionString: getEnvVariable("DATABASE_URL"),
+		url: getEnvVariable("DATABASE_URL"),
 	},
 } satisfies Config;

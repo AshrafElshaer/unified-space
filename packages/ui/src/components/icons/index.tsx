@@ -1,10 +1,11 @@
 import { BuildingIcon } from "@unified/ui/components/icons/building";
 import { Calendar, CalendarFill } from "@unified/ui/components/icons/calendar";
+import { Door, DoorFill } from "@unified/ui/components/icons/door";
 import { GoogleCalendar } from "@unified/ui/components/icons/google-calendar";
 import { GoogleMeet } from "@unified/ui/components/icons/google-meet";
 import { Home, HomeFill } from "@unified/ui/components/icons/home";
 import { LogoSvg } from "@unified/ui/components/icons/logo";
-import { Mail } from "@unified/ui/components/icons/mail";
+import { Mail, MailFill } from "@unified/ui/components/icons/mail";
 import { Messages, MessagesFill } from "@unified/ui/components/icons/messages";
 import { Pdf } from "@unified/ui/components/icons/pdf";
 import { Slack } from "@unified/ui/components/icons/slack";
@@ -39,4 +40,7 @@ export const Icons = {
 	Users: PiUsers,
 	UsersFill: PiUsersFill,
 	Mail,
+	MailFill,
+	Door,
+	DoorFill,
 };

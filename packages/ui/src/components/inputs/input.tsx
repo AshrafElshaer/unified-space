@@ -34,7 +34,7 @@ function Input({
 					"aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
 					startIcon && "pl-10",
 					endIcon && "pr-10",
-					isUrl && "pl-16",
+					// isUrl && "pl-16",
 					className,
 				)}
 				{...props}

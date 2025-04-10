@@ -1,13 +1,15 @@
 import { env } from "@/env";
 import { stripeClient } from "@better-auth/stripe/client";
 
-import { createAuthClient } from "better-auth/client";
+import { createAuthClient } from "better-auth/react";
 import {
+	customSessionClient,
 	emailOTPClient,
 	multiSessionClient,
 	organizationClient,
 	phoneNumberClient,
 } from "better-auth/client/plugins";
+import type { auth } from "./server";
 
 //
 export const authClient = createAuthClient({
@@ -20,5 +22,6 @@ export const authClient = createAuthClient({
 		stripeClient({
 			subscription: true, //if you want to enable subscription management
 		}),
+		customSessionClient<typeof auth>(),
 	],
 });

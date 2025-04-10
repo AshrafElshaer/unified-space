@@ -1,6 +1,9 @@
+"use server";
+
 import { eq } from "drizzle-orm";
 import { db } from "../database";
-import { member, workspace } from "../schema/auth.schema";
+
+import { workspace, workspaceMember } from "../schema";
 
 export async function getWorkspaceById(id: string) {
 	return await db.query.workspace.findFirst({
@@ -9,8 +12,8 @@ export async function getWorkspaceById(id: string) {
 }
 
 export async function getUserWorkspace(userId: string) {
-	const memberRecord = await db.query.member.findFirst({
-		where: eq(member.userId, userId),
+	const memberRecord = await db.query.workspaceMember.findFirst({
+		where: eq(workspaceMember.userId, userId),
 		with: {
 			workspace: true,
 		},
@@ -20,6 +23,6 @@ export async function getUserWorkspace(userId: string) {
 
 export async function getWorkspaceMembers(workspaceId: string) {
 	return await db.query.user.findMany({
-		where: eq(member.workspaceId, workspaceId),
+		where: eq(workspaceMember.workspaceId, workspaceId),
 	});
 }

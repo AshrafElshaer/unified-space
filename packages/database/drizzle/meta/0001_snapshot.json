@@ -1,6 +1,6 @@
 {
-	"id": "1d0716fe-9d7d-4b39-909a-98786cc67d56",
-	"prevId": "00000000-0000-0000-0000-000000000000",
+	"id": "bebc1211-d887-42a1-b77d-a195fe0a4755",
+	"prevId": "1d0716fe-9d7d-4b39-909a-98786cc67d56",
 	"version": "7",
 	"dialect": "postgresql",
 	"tables": {
@@ -568,37 +568,31 @@
 					"primaryKey": false,
 					"notNull": true
 				},
-				"slug": {
-					"name": "slug",
+				"metadata": {
+					"name": "metadata",
 					"type": "text",
 					"primaryKey": false,
-					"notNull": true
+					"notNull": false
 				},
 				"created_at": {
 					"name": "created_at",
 					"type": "timestamp with time zone",
 					"primaryKey": false,
-					"notNull": true,
+					"notNull": false,
 					"default": "now()"
 				},
 				"updated_at": {
 					"name": "updated_at",
 					"type": "timestamp with time zone",
 					"primaryKey": false,
-					"notNull": true,
+					"notNull": false,
 					"default": "now()"
 				}
 			},
 			"indexes": {},
 			"foreignKeys": {},
 			"compositePrimaryKeys": {},
-			"uniqueConstraints": {
-				"workspace_slug_unique": {
-					"name": "workspace_slug_unique",
-					"nullsNotDistinct": false,
-					"columns": ["slug"]
-				}
-			},
+			"uniqueConstraints": {},
 			"policies": {},
 			"checkConstraints": {},
 			"isRLSEnabled": false

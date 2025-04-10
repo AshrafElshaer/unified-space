@@ -11,55 +11,19 @@ import {
 import type * as React from "react";
 
 import { NavTeams } from "@/components/sidebar/nav-teams";
-import { NavUser } from "@/components/sidebar/nav-user";
+
 import { NavWorkspace } from "@/components/sidebar/nav-workspace";
-import { TeamSwitcher } from "@/components/sidebar/team-switcher";
+import { WorkspaceDropdown } from "@/components/sidebar/workspace-dropdown";
 import { Icons } from "@unified/ui/components/icons";
 import {
 	Sidebar,
 	SidebarContent,
-	SidebarFooter,
-	SidebarGroup,
 	SidebarHeader,
-	SidebarMenu,
-	SidebarMenuButton,
-	SidebarMenuItem,
-	SidebarRail,
 } from "@unified/ui/components/sidebar";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { BiMessageRounded, BiSolidMessageRounded } from "react-icons/bi";
-import { HiOutlineUsers, HiUsers } from "react-icons/hi2";
-import { IoGrid, IoGridOutline } from "react-icons/io5";
-import { IoCalendarNumber, IoCalendarNumberOutline } from "react-icons/io5";
-import { PiUserSquare, PiUserSquareFill } from "react-icons/pi";
-import { CommandMenu } from "./cmdk";
 import { NavCore } from "./nav-core";
 // This is sample data.
 const data = {
-	user: {
-		name: "shadcn",
-		email: "m@example.com",
-		avatar: "/avatars/shadcn.jpg",
-	},
 	teams: [
-		{
-			name: "Acme Inc",
-			logo: GalleryVerticalEnd,
-			plan: "Enterprise",
-		},
-		{
-			name: "Acme Corp.",
-			logo: AudioWaveform,
-			plan: "Startup",
-		},
-		{
-			name: "Evil Corp.",
-			logo: Command,
-			plan: "Free",
-		},
-	],
-	navMain: [
 		{
 			title: "Design System",
 			url: "#",
@@ -67,15 +31,11 @@ const data = {
 			isActive: true,
 			items: [
 				{
-					title: "Design System",
+					title: "Issues",
 					url: "#",
 				},
 				{
-					title: "Starred",
-					url: "#",
-				},
-				{
-					title: "Settings",
+					title: "Projects",
 					url: "#",
 				},
 			],
@@ -86,15 +46,11 @@ const data = {
 			icon: Bot,
 			items: [
 				{
-					title: "Genesis",
+					title: "Issues",
 					url: "#",
 				},
 				{
-					title: "Explorer",
-					url: "#",
-				},
-				{
-					title: "Quantum",
+					title: "Projects",
 					url: "#",
 				},
 			],
@@ -105,19 +61,11 @@ const data = {
 			icon: BookOpen,
 			items: [
 				{
-					title: "Introduction",
+					title: "Issues",
 					url: "#",
 				},
 				{
-					title: "Get Started",
-					url: "#",
-				},
-				{
-					title: "Tutorials",
-					url: "#",
-				},
-				{
-					title: "Changelog",
+					title: "Projects",
 					url: "#",
 				},
 			],
@@ -152,12 +100,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 	return (
 		<Sidebar collapsible="offcanvas" className="bg-background" {...props}>
 			<SidebarHeader>
-				<TeamSwitcher teams={data.teams} />
+				<WorkspaceDropdown />
 			</SidebarHeader>
 			<SidebarContent>
 				<NavCore />
 				<NavWorkspace workspaces={data.workspaces} />
-				<NavTeams items={data.navMain} />
+				<NavTeams items={data.teams} />
 			</SidebarContent>
 		</Sidebar>
 	);

@@ -1,5 +1,6 @@
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import { Inset } from "@/components/sidebar/inset";
+import { auth } from "@/lib/auth/server";
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -14,8 +15,9 @@ import {
 	SidebarProvider,
 	SidebarTrigger,
 } from "@unified/ui/components/sidebar";
+import { headers } from "next/headers";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
 	children,
 }: {
 	children: React.ReactNode;

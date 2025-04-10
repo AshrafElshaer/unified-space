@@ -13,6 +13,7 @@ import { CommandMenu } from "./cmdk";
 export function NavCore() {
 	const pathname = usePathname();
 	const { isMobile, setOpenMobile } = useSidebar();
+
 	return (
 		<SidebarGroup>
 			<SidebarMenu>

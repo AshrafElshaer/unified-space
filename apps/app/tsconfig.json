@@ -1,7 +1,7 @@
 {
 	"extends": "@unified/typescript-config/nextjs.json",
 	"compilerOptions": {
-		"lib": ["DOM", "ESNext"],
+		"lib": ["DOM"],
 		"declaration": false,
 		"declarationMap": false,
 

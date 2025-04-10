@@ -3,6 +3,7 @@ import { auth } from "@/lib/auth/server";
 import { actionClient } from "@/lib/safe-action";
 import { updateSessionByToken } from "@unified/database/mutations";
 import { getUserWorkspace } from "@unified/database/queries";
+
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
@@ -30,10 +31,9 @@ export const verifyOtpAction = actionClient
 		z.object({
 			email: z.string().email(),
 			otp: z.string(),
-			redirect_url: z.string(),
 		}),
 	)
-	.action(async ({ parsedInput: { email, otp, redirect_url } }) => {
+	.action(async ({ parsedInput: { email, otp } }) => {
 		const headersList = await headers();
 		const ipAddress = headersList.get("x-forwarded-for");
 		const userAgent = headersList.get("user-agent");
@@ -53,11 +53,7 @@ export const verifyOtpAction = actionClient
 
 		const workspace = await getUserWorkspace(user.id);
 
-		if (!workspace) {
-			redirect("/onboarding");
-		}
-
-		redirect(redirect_url);
+		return workspace;
 	});
 
 export const signOutAction = actionClient

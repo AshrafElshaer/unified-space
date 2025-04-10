@@ -1,3 +1,4 @@
+import { auth } from "@/lib/auth/server";
 import { CopyButton } from "@unified/ui/components/animate-ui/copy-button";
 import { Button } from "@unified/ui/components/button";
 import {
@@ -9,12 +10,25 @@ import {
 	CardTitle,
 } from "@unified/ui/components/card";
 import { Input } from "@unified/ui/components/inputs/input";
+import { headers } from "next/headers";
 
-export default function Page() {
+type PageProps = {
+	params: Promise<{
+		organizationSlug: string;
+	}>;
+};
+
+export default async function Page({ params }: PageProps) {
+	const { organizationSlug } = await params;
+
+	const session = await auth.api.getSession({
+		headers: await headers(),
+	});
+
 	return (
 		<div className="flex items-center justify-center flex-1 p-4">
 			<div className="flex flex-col items-center justify-center gap-4 w-full">
-				<h1 className="text-2xl font-bold">Hello World</h1>
+				<h1 className="text-2xl font-bold">{organizationSlug}</h1>
 				<Button size="sm">Button</Button>
 				<Input placeholder="Input" />
 				<CopyButton content="Hello World" variant="secondary" />

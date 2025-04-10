@@ -20,6 +20,7 @@ import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { Loader } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
 
+import { useRouter } from "next/navigation";
 import { useQueryStates } from "nuqs";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -28,7 +29,8 @@ import { authSearchParams } from "../auth-search-params";
 import { signInAction, verifyOtpAction } from "../auth.actions";
 
 export function VerifyOtp() {
-	const [{ auth_type, redirect_url, email }, setAuthParams] = useQueryStates(
+	const router = useRouter();
+	const [{ redirect_url, email }, setAuthParams] = useQueryStates(
 		authSearchParams,
 		{
 			shallow: true,
@@ -38,6 +40,13 @@ export function VerifyOtp() {
 		onError: ({ error }) => {
 			toast.error(error.serverError);
 			setIsError(true);
+		},
+		onSuccess: ({ data }) => {
+			if (data) {
+				router.push(redirect_url);
+			} else {
+				router.push("/onboarding");
+			}
 		},
 	});
 	const { execute: resend, isExecuting: isResending } = useAction(
@@ -77,7 +86,6 @@ export function VerifyOtp() {
 		execute({
 			email,
 			otp: code,
-			redirect_url,
 		});
 	}
 

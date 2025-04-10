@@ -2,13 +2,14 @@ import { env } from "@/env";
 import { resend } from "@/lib/resend";
 import { stripe } from "@better-auth/stripe";
 import { db } from "@unified/database";
-import { getUserWorkspace } from "@unified/database/queries";
+import { getSessionById, getUserWorkspace } from "@unified/database/queries";
 import * as schema from "@unified/database/schema";
 import { OtpEmail } from "@unified/email/otp-email";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
 import {
+	customSession,
 	emailOTP,
 	multiSession,
 	organization,
@@ -34,10 +35,20 @@ export const auth = betterAuth({
 		updateAge: 60 * 60 * 24, // 1 day (every 1 day the session expiration is updated)
 		cookieCache: {
 			enabled: true,
-			maxAge: 5 * 60, // Cache duration in seconds
+			maxAge: 60 * 60 * 24, // Cache duration in seconds
 		},
 	},
 	plugins: [
+		customSession(async ({ user, session }) => {
+			const sessionData = await getSessionById(session.id);
+			return {
+				session: {
+					...session,
+					userAgent: sessionData?.userAgent,
+				},
+				user,
+			};
+		}),
 		stripe({
 			stripeClient,
 			stripeWebhookSecret: env.STRIPE_WEBHOOK_SECRET,
@@ -72,33 +83,6 @@ export const auth = betterAuth({
 			expiresIn: 10 * 60, // 10 minutes,
 			otpLength: 6,
 		}),
-		organization({
-			organizationLimit: 1,
-			creatorRole: "owner" as const,
-			roles: {
-				owner: {
-					authorize: () => ({ success: true }),
-					statements: {},
-				},
-				admin: {
-					authorize: () => ({ success: true }),
-					statements: {},
-				},
-				team_lead: {
-					authorize: () => ({ success: true }),
-					statements: {},
-				},
-				member: {
-					authorize: () => ({ success: true }),
-					statements: {},
-				},
-			} as const,
-			schema: {
-				organization: {
-					modelName: "workspace",
-				},
-			},
-		}),
 		multiSession(),
 		nextCookies(),
 		phoneNumber({
@@ -108,19 +92,6 @@ export const auth = betterAuth({
 		}),
 	],
 	databaseHooks: {
-		session: {
-			create: {
-				before: async (session) => {
-					const workspace = await getUserWorkspace(session.userId);
-					return {
-						data: {
-							...session,
-							activeOrganizationId: workspace?.id,
-						},
-					};
-				},
-			},
-		},
 		user: {
 			create: {
 				async after(user, context) {
