@@ -29,6 +29,7 @@ export function NavTeams({
 		items?: {
 			title: string;
 			url: string;
+			icon?: React.ReactNode;
 		}[];
 	}[];
 }) {
@@ -52,11 +53,12 @@ export function NavTeams({
 								</SidebarMenuButton>
 							</CollapsibleTrigger>
 							<CollapsibleContent>
-								<SidebarMenuSub>
+								<SidebarMenuSub className="border-0 mx-2">
 									{item.items?.map((subItem) => (
 										<SidebarMenuSubItem key={subItem.title}>
 											<SidebarMenuSubButton asChild>
 												<a href={subItem.url}>
+													{subItem.icon && subItem.icon}
 													<span>{subItem.title}</span>
 												</a>
 											</SidebarMenuSubButton>

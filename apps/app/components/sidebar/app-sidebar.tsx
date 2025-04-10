@@ -9,6 +9,7 @@ import {
 	SquareTerminal,
 } from "lucide-react";
 import type * as React from "react";
+import { BsBoxSeam, BsBoxSeamFill } from "react-icons/bs";
 
 import { NavTeams } from "@/components/sidebar/nav-teams";
 
@@ -20,6 +21,7 @@ import {
 	SidebarContent,
 	SidebarHeader,
 } from "@unified/ui/components/sidebar";
+import { MdOutlineTaskAlt } from "react-icons/md";
 import { NavCore } from "./nav-core";
 // This is sample data.
 const data = {
@@ -31,12 +33,14 @@ const data = {
 			isActive: true,
 			items: [
 				{
-					title: "Issues",
+					title: "Tasks",
 					url: "#",
+					icon: <MdOutlineTaskAlt className="size-2" />,
 				},
 				{
 					title: "Projects",
 					url: "#",
+					icon: <BsBoxSeam className="size-2" />,
 				},
 			],
 		},
@@ -46,12 +50,14 @@ const data = {
 			icon: Bot,
 			items: [
 				{
-					title: "Issues",
+					title: "Tasks",
 					url: "#",
+					icon: <MdOutlineTaskAlt className="size-2" />,
 				},
 				{
 					title: "Projects",
 					url: "#",
+					icon: <BsBoxSeam className="size-2" />,
 				},
 			],
 		},
@@ -61,12 +67,14 @@ const data = {
 			icon: BookOpen,
 			items: [
 				{
-					title: "Issues",
+					title: "Tasks",
 					url: "#",
+					icon: <MdOutlineTaskAlt className="size-2" />,
 				},
 				{
 					title: "Projects",
 					url: "#",
+					icon: <BsBoxSeam className="size-2" />,
 				},
 			],
 		},
