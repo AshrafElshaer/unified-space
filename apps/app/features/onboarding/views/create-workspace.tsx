@@ -1,7 +1,6 @@
 "use client";
 
 import { TextGenerateEffect } from "@/components/text-generate-effect";
-import { authClient } from "@/lib/auth/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertWorkspaceSchema } from "@unified/database/validations";
 import { Button } from "@unified/ui/components/button";
@@ -14,11 +13,9 @@ import {
 	FormMessage,
 } from "@unified/ui/components/form";
 import { Icons } from "@unified/ui/components/icons";
-import { Input, UrlInput } from "@unified/ui/components/inputs";
-import { Loader } from "lucide-react";
+import { Input } from "@unified/ui/components/inputs";
 import { AnimatePresence, motion } from "motion/react";
 import { useAction } from "next-safe-action/hooks";
-import { useState } from "react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -71,10 +68,7 @@ export function WorkspaceOnboarding() {
 const formSchema = insertWorkspaceSchema.omit({ ownerId: true });
 
 export function CreateWorkspace() {
-	const { execute, status, isExecuting } = useAction(createWorkspaceAction, {
-		onSuccess: () => {
-			toast.success("Workspace created successfully");
-		},
+	const { execute, isExecuting } = useAction(createWorkspaceAction, {
 		onError: ({ error }) => {
 			toast.error(error.serverError);
 		},
