@@ -17,12 +17,15 @@ export const workspace = pgTable("workspace", {
 	id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
 	name: text("name").notNull(),
 	metadata: text("metadata"),
+	ownerId: uuid("owner_id")
+		.references(() => user.id)
+		.notNull(),
 	createdAt: timestamp("created_at", { withTimezone: true }).default(
 		sql`now()`,
 	),
-	updatedAt: timestamp("updated_at", { withTimezone: true }).default(
-		sql`now()`,
-	),
+	updatedAt: timestamp("updated_at", { withTimezone: true })
+		.default(sql`now()`)
+		.$onUpdate(() => sql`now()`),
 });
 
 export const workspaceMemberRole = pgEnum("workspace_member_role", [
@@ -53,7 +56,8 @@ export const workspaceMember = pgTable(
 			.default(sql`now()`),
 		updatedAt: timestamp("updated_at", { withTimezone: true })
 			.notNull()
-			.default(sql`now()`),
+			.default(sql`now()`)
+			.$onUpdate(() => sql`now()`),
 	},
 	(table) => [
 		index("workspace_member_workspace_id_user_id_idx").on(
@@ -70,12 +74,16 @@ export const team = pgTable("team", {
 	workspaceId: uuid("workspace_id")
 		.notNull()
 		.references(() => workspace.id, { onDelete: "cascade" }),
+	leaderId: uuid("leader_id")
+		.references(() => user.id)
+		.notNull(),
 	createdAt: timestamp("created_at", { withTimezone: true })
 		.notNull()
 		.default(sql`now()`),
 	updatedAt: timestamp("updated_at", { withTimezone: true })
 		.notNull()
-		.default(sql`now()`),
+		.default(sql`now()`)
+		.$onUpdate(() => sql`now()`),
 });
 
 export const teamMember = pgTable(
@@ -88,13 +96,15 @@ export const teamMember = pgTable(
 		userId: uuid("user_id")
 			.notNull()
 			.references(() => user.id, { onDelete: "cascade" }),
+
 		role: teamMemberRole("role").notNull(),
 		createdAt: timestamp("created_at", { withTimezone: true })
 			.notNull()
 			.default(sql`now()`),
 		updatedAt: timestamp("updated_at", { withTimezone: true })
 			.notNull()
-			.default(sql`now()`),
+			.default(sql`now()`)
+			.$onUpdate(() => sql`now()`),
 	},
 	(table) => [
 		index("team_member_team_id_user_id_idx").on(table.teamId, table.userId),

@@ -1,6 +1,28 @@
-import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+import { isValidPhoneNumber } from "libphonenumber-js";
+
+import {
+	createInsertSchema,
+	createSelectSchema,
+	createUpdateSchema,
+} from "drizzle-zod";
 import { z } from "zod";
 import * as schema from "./schema";
+export const selectUserSchema = createSelectSchema(schema.user);
+export const insertUserSchema = createInsertSchema(schema.user, {
+	name: z.string().min(1, { message: "Name is required" }),
+	phoneNumber: z.string().refine(isValidPhoneNumber, {
+		message: "Invalid phone number",
+	}),
+}).omit({
+	createdAt: true,
+});
+
+export const updateUserSchema = createUpdateSchema(schema.user, {
+	name: z.string().min(1, { message: "Name is required" }),
+	phoneNumber: z.string().refine(isValidPhoneNumber, {
+		message: "Invalid phone number",
+	}),
+});
 
 export const insertWorkspaceSchema = createInsertSchema(schema.workspace, {
 	name: z.string().min(1, { message: "Name is required" }),
@@ -8,7 +30,7 @@ export const insertWorkspaceSchema = createInsertSchema(schema.workspace, {
 	createdAt: true,
 });
 export const selectWorkspaceSchema = createSelectSchema(schema.workspace);
-export const updateWorkspaceSchema = insertWorkspaceSchema.partial();
+export const updateWorkspaceSchema = createUpdateSchema(schema.workspace);
 
 export const insertWorkspaceMemberSchema = createInsertSchema(
 	schema.workspaceMember,
@@ -22,8 +44,9 @@ export const insertWorkspaceMemberSchema = createInsertSchema(
 export const selectWorkspaceMemberSchema = createSelectSchema(
 	schema.workspaceMember,
 );
-export const updateWorkspaceMemberSchema =
-	insertWorkspaceMemberSchema.partial();
+export const updateWorkspaceMemberSchema = createUpdateSchema(
+	schema.workspaceMember,
+);
 
 export const insertTeamSchema = createInsertSchema(schema.team, {
 	name: z.string().min(1, { message: "Name is required" }),
@@ -32,7 +55,7 @@ export const insertTeamSchema = createInsertSchema(schema.team, {
 });
 
 export const selectTeamSchema = createSelectSchema(schema.team);
-export const updateTeamSchema = insertTeamSchema.partial();
+export const updateTeamSchema = createUpdateSchema(schema.team);
 
 export const insertTeamMemberSchema = createInsertSchema(schema.teamMember, {
 	role: z.enum(schema.teamMemberRole.enumValues),
@@ -41,4 +64,4 @@ export const insertTeamMemberSchema = createInsertSchema(schema.teamMember, {
 });
 
 export const selectTeamMemberSchema = createSelectSchema(schema.teamMember);
-export const updateTeamMemberSchema = insertTeamMemberSchema.partial();
+export const updateTeamMemberSchema = createUpdateSchema(schema.teamMember);

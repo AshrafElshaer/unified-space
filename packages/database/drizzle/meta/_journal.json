@@ -15,6 +15,20 @@
 			"when": 1744253067208,
 			"tag": "0001_nifty_madelyne_pryor",
 			"breakpoints": true
+		},
+		{
+			"idx": 2,
+			"version": "7",
+			"when": 1744330030123,
+			"tag": "0002_absurd_warbound",
+			"breakpoints": true
+		},
+		{
+			"idx": 3,
+			"version": "7",
+			"when": 1744330087392,
+			"tag": "0003_lowly_silver_samurai",
+			"breakpoints": true
 		}
 	]
 }
