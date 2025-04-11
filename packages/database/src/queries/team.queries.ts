@@ -39,3 +39,12 @@ export async function getTeamMembers(teamId: string) {
 	});
 	return teamMembers;
 }
+
+export async function getUserTeams(userId: string) {
+	return await db.query.teamMember.findMany({
+		where: eq(schema.teamMember.userId, userId),
+		with: {
+			team: true,
+		},
+	});
+}
