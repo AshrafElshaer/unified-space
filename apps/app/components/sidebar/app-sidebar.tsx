@@ -9,6 +9,7 @@ import {
 	SquareTerminal,
 } from "lucide-react";
 import type * as React from "react";
+
 import { BsBoxSeam, BsBoxSeamFill } from "react-icons/bs";
 
 import { NavTeams } from "@/components/sidebar/nav-teams";
@@ -35,12 +36,12 @@ const data = {
 				{
 					title: "Tasks",
 					url: "#",
-					icon: <MdOutlineTaskAlt className="size-2" />,
+					icon: <Icons.Copy className="size-2" />,
 				},
 				{
 					title: "Projects",
 					url: "#",
-					icon: <BsBoxSeam className="size-2" />,
+					icon: <Icons.Package />,
 				},
 			],
 		},
@@ -52,12 +53,12 @@ const data = {
 				{
 					title: "Tasks",
 					url: "#",
-					icon: <MdOutlineTaskAlt className="size-2" />,
+					icon: <Icons.Copy className="size-2" />,
 				},
 				{
 					title: "Projects",
 					url: "#",
-					icon: <BsBoxSeam className="size-2" />,
+					icon: <Icons.Package />,
 				},
 			],
 		},
@@ -69,12 +70,12 @@ const data = {
 				{
 					title: "Tasks",
 					url: "#",
-					icon: <MdOutlineTaskAlt className="size-2" />,
+					icon: <Icons.Copy className="size-2" />,
 				},
 				{
 					title: "Projects",
 					url: "#",
-					icon: <BsBoxSeam className="size-2" />,
+					icon: <Icons.Package />,
 				},
 			],
 		},

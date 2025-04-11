@@ -22,7 +22,10 @@ export async function getUserWorkspace(userId: string) {
 }
 
 export async function getWorkspaceMembers(workspaceId: string) {
-	return await db.query.user.findMany({
+	return await db.query.workspaceMember.findMany({
 		where: eq(workspaceMember.workspaceId, workspaceId),
+		with: {
+			user: true,
+		},
 	});
 }

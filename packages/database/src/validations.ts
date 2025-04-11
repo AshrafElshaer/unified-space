@@ -24,3 +24,21 @@ export const selectWorkspaceMemberSchema = createSelectSchema(
 );
 export const updateWorkspaceMemberSchema =
 	insertWorkspaceMemberSchema.partial();
+
+export const insertTeamSchema = createInsertSchema(schema.team, {
+	name: z.string().min(1, { message: "Name is required" }),
+}).omit({
+	createdAt: true,
+});
+
+export const selectTeamSchema = createSelectSchema(schema.team);
+export const updateTeamSchema = insertTeamSchema.partial();
+
+export const insertTeamMemberSchema = createInsertSchema(schema.teamMember, {
+	role: z.enum(schema.teamMemberRole.enumValues),
+}).omit({
+	createdAt: true,
+});
+
+export const selectTeamMemberSchema = createSelectSchema(schema.teamMember);
+export const updateTeamMemberSchema = insertTeamMemberSchema.partial();
