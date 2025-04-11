@@ -108,6 +108,7 @@ export const teamMember = pgTable(
 	},
 	(table) => [
 		index("team_member_team_id_user_id_idx").on(table.teamId, table.userId),
+		unique("team_member_unique").on(table.teamId, table.userId),
 	],
 );
 
@@ -140,4 +141,5 @@ export const teamRelations = relations(team, ({ many, one }) => ({
 
 export const teamMemberRelations = relations(teamMember, ({ one }) => ({
 	team: one(team, { fields: [teamMember.teamId], references: [team.id] }),
+	user: one(user, { fields: [teamMember.userId], references: [user.id] }),
 }));

@@ -29,6 +29,20 @@
 			"when": 1744330087392,
 			"tag": "0003_lowly_silver_samurai",
 			"breakpoints": true
+		},
+		{
+			"idx": 4,
+			"version": "7",
+			"when": 1744384448399,
+			"tag": "0004_fair_ego",
+			"breakpoints": true
+		},
+		{
+			"idx": 5,
+			"version": "7",
+			"when": 1744384724355,
+			"tag": "0005_absent_the_hand",
+			"breakpoints": true
 		}
 	]
 }

@@ -16,6 +16,8 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@unified/ui/components/select";
+import { Skeleton } from "@unified/ui/components/skeleton";
+import { UserInitials } from "../user-initials";
 type Props = {
 	value: string;
 	onChange: (value: string) => void;
@@ -24,7 +26,7 @@ export function MemberSelector({ value, onChange }: Props) {
 	const { data: workspace } = useWorkspace();
 	const { data: sessionData } = useSession();
 
-	const { data: members } = useQuery({
+	const { data: members, isLoading } = useQuery({
 		queryKey: ["workspace-members"],
 		queryFn: () => getWorkspaceMembers(workspace?.id ?? ""),
 		enabled: !!workspace?.id,
@@ -35,19 +37,30 @@ export function MemberSelector({ value, onChange }: Props) {
 				<SelectValue placeholder="Select a member" />
 			</SelectTrigger>
 			<SelectContent>
-				{members?.map((member) => (
-					<SelectItem key={member.id} value={member.id}>
-						<Avatar className="size-6">
-							<AvatarImage src={member.user.image ?? undefined} />
-							<AvatarFallback>
-								{member.user.name[0]}
-								{member.user.name[1]}
-							</AvatarFallback>
-						</Avatar>
-						{member.user.name}{" "}
-						{member.userId === sessionData?.user?.id && "(You)"}
-					</SelectItem>
-				))}
+				{isLoading
+					? [1, 2, 3].map((i) => (
+							<SelectItem
+								key={i}
+								value={i.toString()}
+								disabled
+								className="flex items-center gap-2"
+							>
+								<Skeleton className="size-4 rounded-full" />
+								<Skeleton className="w-32 h-4" />
+							</SelectItem>
+						))
+					: members?.map((member) => (
+							<SelectItem key={member.user.id} value={member.user.id}>
+								<Avatar className="size-4">
+									<AvatarImage src={member.user.image ?? undefined} />
+									<AvatarFallback className="text-xs">
+										<UserInitials name={member.user.name} />
+									</AvatarFallback>
+								</Avatar>
+								{member.user.name}{" "}
+								{member.userId === sessionData?.user?.id && "(You)"}
+							</SelectItem>
+						))}
 			</SelectContent>
 		</Select>
 	);

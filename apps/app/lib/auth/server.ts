@@ -41,10 +41,12 @@ export const auth = betterAuth({
 	plugins: [
 		customSession(async ({ user, session }) => {
 			const sessionData = await getSessionById(session.id);
+			const workspace = await getUserWorkspace(user.id);
 			return {
 				session: {
 					...session,
 					userAgent: sessionData?.userAgent,
+					workspaceId: workspace?.id,
 				},
 				user,
 			};

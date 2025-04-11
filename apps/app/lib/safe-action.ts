@@ -2,6 +2,7 @@
 // import * as Sentry from "@sentry/nextjs";
 import { auth } from "@/lib/auth/server";
 import { resend } from "@/lib/resend";
+import { getUserWorkspace } from "@unified/database/queries";
 // import { getUser } from "@optima/supabase/queries";
 // import { createServerClient } from "@/lib/supabase/server";
 // import { setupAnalytics } from "@optima/analytics/server";
@@ -96,10 +97,12 @@ export const authActionClient = actionClientWithMeta
 		// 		analytics.track(metadata.track);
 		// 	}
 		// }
+		const workspace = await getUserWorkspace(session.user.id);
 
 		return next({
 			ctx: {
 				session,
+				workspace,
 			},
 		});
 

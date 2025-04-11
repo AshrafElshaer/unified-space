@@ -12,16 +12,17 @@ export async function getWorkspaceTeams(workspaceId: string) {
 }
 
 export async function getTeamsWithMembers(workspaceId: string) {
-	const teams = await db
-		.select({
-			team: schema.team,
-			members: schema.teamMember,
-			user: schema.user,
-		})
-		.from(schema.team)
-		.leftJoin(schema.teamMember, eq(schema.team.id, schema.teamMember.teamId))
-		.leftJoin(schema.user, eq(schema.teamMember.userId, schema.user.id))
-		.where(eq(schema.team.workspaceId, workspaceId));
+	const teams = await db.query.team.findMany({
+		where: eq(schema.team.workspaceId, workspaceId),
+		with: {
+			members: {
+				with: {
+					user: true,
+				},
+			},
+		},
+	});
+
 	return teams;
 }
 

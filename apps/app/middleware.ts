@@ -28,6 +28,7 @@ export async function middleware(request: NextRequest) {
 		headers: {
 			"x-pathname": pathname,
 			"x-user-id": session.user.id,
+			"x-workspace-id": session.session.workspaceId ?? "",
 		},
 	});
 }
