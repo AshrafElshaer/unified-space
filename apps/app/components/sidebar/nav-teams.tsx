@@ -21,21 +21,7 @@ import {
 } from "@unified/ui/components/sidebar";
 import Link from "next/link";
 
-export function NavTeams({
-	items,
-}: {
-	items: {
-		title: string;
-		url: string;
-		icon?: LucideIcon;
-		isActive?: boolean;
-		items?: {
-			title: string;
-			url: string;
-			icon?: React.ReactNode;
-		}[];
-	}[];
-}) {
+export function NavTeams() {
 	const { data: userTeams } = useUserTeams();
 	if (!userTeams) return null;
 	return (
